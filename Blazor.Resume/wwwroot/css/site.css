@@ -1,0 +1,110 @@
+﻿:root {
+	--primary: #bd5d38;
+	--light: #f8f9fa;
+	--dark: #212529;
+}
+
+/* Sidebar for large screens */
+#sideNav {
+	background-color: var(--primary);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 250px;
+	height: 100vh;
+	overflow-y: auto;
+	z-index: 1030;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 1rem;
+}
+
+.img-profile {
+	max-width: 150px;
+	border-radius: 50%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	border: 0.5rem solid rgba(255, 255, 255, 0.2)
+}
+
+.nav-link {
+	color: var(--light);
+}
+
+	.nav-link.active {
+		font-weight: bold;
+		color: var(--light);
+	}
+
+.main-content {
+	margin-left: 250px; /* leave space for sidebar */
+	padding: 2rem;
+	background-color: var(--light);
+	min-height: 100vh;
+}
+
+/* Navbar items vertical by default */
+#sideNav .navbar-nav {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding-left: 0;
+	margin-bottom: 0;
+	list-style: none;
+}
+
+#sideNav .nav-item {
+	width: 100%;
+	margin: 0.5rem 0;
+}
+
+#sideNav .nav-link {
+	padding: 0.5rem 1rem;
+}
+
+/* Responsive styles for small screens < 1000px*/
+@media (max-width: 992px) {
+	/* Switch navbar to top fixed */
+	#sideNav {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: auto;
+		padding: 0.5rem 1rem;
+		flex-direction: row;
+		align-items: center;
+		z-index: 1030;
+	}
+
+	/* Adjust main content margin for top navbar */
+	.main-content {
+		margin-left: 0;
+		padding-top: 70px; /* enough space for fixed top navbar */
+		background-color: var(--light);
+	}
+
+	/* Collapse container fills horizontal space */
+	#sideNav .navbar-collapse {
+		flex-grow: 1;
+	}
+
+	/* Navbar-nav vertical for dropdown */
+	#sideNav .navbar-nav {
+		flex-direction: column;
+		width: 100%;
+	}
+
+	#sideNav .nav-item {
+		margin: 0;
+		width: 100%;
+	}
+
+	#sideNav .nav-link {
+		padding: 0.5rem 1rem;
+		color: var(--light);
+	}
+}
+
