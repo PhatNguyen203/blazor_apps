@@ -1,3 +1,48 @@
-﻿h1 {
-	color: red !important;
+﻿.resume-section-content .text-primary {
+	color: var(--primary) !important;
+}
+
+.resume-section-content .subheading {
+	font-size: 1.2rem;
+	font-weight: 500;
+	margin-bottom: 1.5rem;
+}
+/* Paragraph styling */
+
+.resume-section-content .lead {
+	font-size: 1.1rem;
+	line-height: 1.7;
+	margin-bottom: 2rem;
+}
+/* Social icons layout */
+
+.social-icons {
+	display: flex;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+/* Individual icon styling */
+
+.social-icons .social-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 3.5rem;
+	width: 3.5rem;
+	background-color: #495057;
+	color: #fff;
+	border-radius: 50%;
+	font-size: 1.5rem;
+	text-decoration: none;
+	transition: background-color 0.3s ease;
+}
+
+.social-icons .social-icon:hover {
+	background-color: var(--primary);
+}
+
+@media (min-width: 768px) {
+	section.resume-section {
+		min-height: 100vh;
+	}
 }

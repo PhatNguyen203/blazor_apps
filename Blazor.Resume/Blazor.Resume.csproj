@@ -5,13 +5,4 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Pages\About.razor.css" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Pages\About.razor.css" />
-  </ItemGroup>
-
 </Project>

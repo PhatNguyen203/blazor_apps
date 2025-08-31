@@ -1,0 +1,8 @@
+﻿@media (min-width: 992px) {
+	section#interests {
+		padding-left: 18rem;
+		padding-right: 3rem;
+		padding-top: 1rem;
+		padding-bottom: 5rem;
+	}
+}
