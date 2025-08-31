@@ -1,0 +1,42 @@
+﻿@page "/"
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <img src="products/@carImg" alt="" class="img-fluid" />
+        </div>
+        <div class="col-6">
+
+            @foreach (var color in colors)
+            {
+                <button class="btn @ButtonClass(color) m-2" @onclick="()=>ChangeColor(color)">
+                    @color.ToUpper()
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private string carImg = "red-car.jpg";
+    private List<string> colors = new List<string>
+    {
+        "red", "silver", "black", "steel"
+    };
+
+    private void ChangeColor(string color)
+    {
+        carImg = color + "-car.jpg";
+    }
+
+    private string ButtonClass(string color)
+    {
+        return color switch
+        {
+            "silver" => "btn-primary",
+            "black" => "btn-dark",
+            "steel" => "btn-secondary",
+            _ => "btn-danger"
+        };
+    }
+}
