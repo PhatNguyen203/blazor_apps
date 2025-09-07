@@ -1,0 +1,54 @@
+﻿@page "/"
+
+<h2 class="text-white">My Wallet</h2>
+<h3 class="text-success fw-bold">@Balance</h3>
+<p class="text-white">Total balance</p>
+
+<button class="btn btn-success me-2" @onclick='() => ShowModal("Deposit")'>Deposit</button>
+<button class="btn btn-danger" @onclick='() => ShowModal("Withdraw")'>Withdraw</button>
+
+<h4 class="mt-4 text-white">Transaction History</h4>
+<TransactionList Transactions="@Transactions" />
+<TransactionModal @ref="ModalRef" OnSubmit="HandleTransaction" />
+
+@* Show error message *@
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @ErrorMessage
+        <button type="button" class="btn-close" @onclick="() => ErrorMessage = null" aria-label="Close"></button>
+    </div>
+}
+
+@code {
+    private string ErrorMessage;
+    private decimal Balance = 0;
+    private List<Transaction> Transactions = new();
+
+    //using ref for modal
+    private TransactionModal ModalRef;
+
+    private void ShowModal(string type)
+    {
+        ModalRef.Show(type);
+    }
+
+    private void HandleTransaction(Transaction transaction)
+    {
+        if (transaction.Type == "Deposit")
+        {
+            Balance += transaction.Amount;
+        }
+        else if (transaction.Type == "Withdraw")
+        {
+            if (transaction.Amount > Balance)
+            {
+                ErrorMessage = "Insufficient balance for withdrawal.";
+                return;
+            }
+            Balance -= transaction.Amount;
+        }
+
+        Transactions.Insert(0, transaction);
+    }
+}

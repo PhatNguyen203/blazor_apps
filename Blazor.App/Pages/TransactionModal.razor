@@ -1,0 +1,60 @@
+﻿@if (IsVisible)
+{
+    <div class="modal show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Title</h5>
+                    <button type="button" class="btn-close" @onclick="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="number" @bind="Amount" min="0.01" class="form-control" />
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" @onclick="Close">Close</button>
+                    <button class="btn btn-primary" @onclick="Submit">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private bool IsVisible;
+    private string Title;
+    private string TransactionType;
+    private decimal Amount;
+
+    [Parameter]
+    public EventCallback<Transaction> OnSubmit { get; set; }
+
+    public void Show(string type)
+    {
+        TransactionType = type;
+        Title = type == "Deposit" ? "Deposit Money" : "Withdraw Money";
+        Amount = 0;
+        IsVisible = true;
+        StateHasChanged();
+    }
+
+    private async Task Submit()
+    {
+        if (Amount <= 0) return;
+
+        await OnSubmit.InvokeAsync(new Transaction
+        {
+                Type = TransactionType,
+                Amount = Amount,
+                Time = DateTime.Now
+        });
+
+        // Closing Modal after submit
+        Close();
+    }
+
+    private void Close()
+    {
+        IsVisible = false;
+        StateHasChanged();
+    }
+}

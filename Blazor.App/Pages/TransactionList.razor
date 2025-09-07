@@ -1,0 +1,38 @@
+﻿
+@if (!Transactions.Any())
+{
+    <p class="text-white">No transactions yet.</p>
+}
+else 
+{
+    <table class="table text-white">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var t in Transactions)
+            {
+                <tr class="@GetRowClass(t.Type)">
+                    <td>@t.Type</td>
+                    <td>@t.Amount.ToString("C")</td>
+                    <td>@t.Time.ToString("dd MMM h:mmtt")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    [Parameter]
+    public List<Transaction> Transactions { get; set; } = new();
+
+    private string GetRowClass(string type)
+    {
+        return type == "Deposit" ? "text-success" : "text-danger";
+    }
+}
